@@ -13,8 +13,9 @@ View your app in AI Studio: https://ai.studio/apps/c413c4a5-be25-4db8-9339-92e12
 **Prerequisites:**  Node.js
 
 
-1. Install dependencies:
-   `npm install`
-2. Set the `GEMINI_API_KEY` in [.env.local](.env.local) to your Gemini API key
-3. Run the app:
-   `npm run dev`
+1. Install dependencies with Windows 11 inside your file by typing *cmd*.
+2. Once your Windows Powershell opens, type *npm install*.
+3. Let the previous step finish. If there are errors, type *npm audit fix --force*
+4. Type *npm run electron:build* to build your executable.
+
+   You can type *npm run electron:start* to view your app while Electron is building it!

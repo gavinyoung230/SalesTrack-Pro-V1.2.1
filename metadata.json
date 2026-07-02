@@ -1,0 +1,6 @@
+{
+  "name": "SalesTrack Pro",
+  "description": "A modern, responsive, single-page application to track and manage orders, sales, and expenses with data tables, search, filters, modals, and interactive analytics dashboards.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

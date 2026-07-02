@@ -1,0 +1,92 @@
+{
+  "entities": {
+    "User": {
+      "title": "User",
+      "description": "User account containing login creds, roles, and custom categories",
+      "type": "object",
+      "properties": {
+        "email": {
+          "type": "string"
+        },
+        "pass": {
+          "type": "string"
+        },
+        "role": {
+          "type": "string",
+          "enum": ["user", "admin"]
+        },
+        "customCategories": {
+          "type": "array"
+        }
+      },
+      "required": ["email", "pass", "role"]
+    },
+    "Order": {
+      "title": "Order",
+      "description": "A revenue sales or ledger record",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "customerName": {
+          "type": "string"
+        },
+        "date": {
+          "type": "string"
+        },
+        "product": {
+          "type": "string"
+        },
+        "amount": {
+          "type": "number"
+        },
+        "status": {
+          "type": "string",
+          "enum": ["Pending", "Completed", "Cancelled"]
+        },
+        "category": {
+          "type": "string"
+        }
+      },
+      "required": ["id", "customerName", "date", "product", "amount", "status"]
+    },
+    "Expense": {
+      "title": "Expense",
+      "description": "An overhead cost logging entry",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "date": {
+          "type": "string"
+        },
+        "category": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "amount": {
+          "type": "number"
+        }
+      },
+      "required": ["id", "date", "category", "description", "amount"]
+    }
+  },
+  "firestore": {
+    "/users/{userEmail}": {
+      "schema": "User",
+      "description": "Root user documentation"
+    },
+    "/users/{userEmail}/orders/{orderId}": {
+      "schema": "Order",
+      "description": "Orders logged specifically by or for this user"
+    },
+    "/users/{userEmail}/expenses/{expenseId}": {
+      "schema": "Expense",
+      "description": "Overhead expenses logged specifically by or for this user"
+    }
+  }
+}

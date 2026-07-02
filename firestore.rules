@@ -1,0 +1,52 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    
+    // Global Safety Net
+    match /{document=**} {
+      allow read, write: if false;
+    }
+
+    function isSignedIn() {
+      // Allow operations without client-side Firebase Auth in this preview workspace,
+      // while retaining strict schema type & size-boundary validations.
+      return true;
+    }
+
+    function isValidId(id) {
+      return id is string && id.size() <= 128 && id.matches('^[a-zA-Z0-9_\\-]+$');
+    }
+
+    function incoming() {
+      return request.resource.data;
+    }
+
+    match /users/{userEmail} {
+      allow get: if isSignedIn();
+      allow create, update: if isSignedIn() && incoming().email is string && incoming().email.size() <= 200;
+
+      match /orders/{orderId} {
+        allow read: if isSignedIn();
+        allow create, update: if isSignedIn() && isValidId(orderId) &&
+          incoming().id is string && incoming().id.size() <= 64 &&
+          incoming().customerName is string && incoming().customerName.size() <= 200 &&
+          incoming().product is string && incoming().product.size() <= 200 &&
+          incoming().amount is number &&
+          incoming().status is string && (incoming().status == 'Pending' || incoming().status == 'Completed' || incoming().status == 'Cancelled') &&
+          incoming().date is string && incoming().date.size() <= 32;
+        allow delete: if isSignedIn() && isValidId(orderId);
+      }
+
+      match /expenses/{expenseId} {
+        allow read: if isSignedIn();
+        allow create, update: if isSignedIn() && isValidId(expenseId) &&
+          incoming().id is string && incoming().id.size() <= 64 &&
+          incoming().category is string && incoming().category.size() <= 100 &&
+          incoming().description is string && incoming().description.size() <= 500 &&
+          incoming().amount is number &&
+          incoming().date is string && incoming().date.size() <= 32;
+        allow delete: if isSignedIn() && isValidId(expenseId);
+      }
+    }
+  }
+}

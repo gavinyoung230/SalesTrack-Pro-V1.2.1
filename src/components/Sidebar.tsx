@@ -59,7 +59,7 @@ export default function Sidebar({
   return (
     <>
       {/* Mobile Top Header (only visible on mobile, under lg responsive sizes) */}
-      <header id="mobile-top-navbar" className="lg:hidden w-full bg-[#09090b] border-b border-blue-950 px-5 py-4 flex items-center justify-between z-40 fixed top-0 left-0">
+      <header id="mobile-top-navbar" className="lg:hidden w-full bg-[#09090b] border-b border-blue-950 px-5 py-4 flex items-center justify-between z-40 fixed top-0 left-0 print:hidden">
         <div className="flex items-center gap-2">
           <div className="p-1 bg-gradient-to-br from-blue-500 to-blue-700 rounded-md">
             <Zap size={18} className="text-white" />
@@ -80,14 +80,14 @@ export default function Sidebar({
         <div
           id="mobile-sidebar-backdrop"
           onClick={() => setIsOpenMobile(false)}
-          className="lg:hidden fixed inset-0 bg-black/80 backdrop-blur-sm z-40"
+          className="lg:hidden fixed inset-0 bg-black/80 backdrop-blur-sm z-40 print:hidden"
         />
       )}
 
       {/* Sidebar Navigation Panel Container (Docked left on desktop, hidden drawer on mobile) */}
       <aside
         id="sidebar-navigation-panel"
-        className={`fixed top-0 bottom-0 left-0 lg:sticky h-screen bg-[#0a0a0a] border-r border-[#222] w-64 z-50 transform lg:transform-none transition-transform duration-300 flex flex-col justify-between ${
+        className={`fixed top-0 bottom-0 left-0 lg:sticky h-screen bg-[#0a0a0a] border-r border-[#222] w-64 z-50 transform lg:transform-none transition-transform duration-300 flex flex-col justify-between print:hidden ${
           isOpenMobile ? 'translate-x-0 pt-0' : '-translate-x-full lg:translate-x-0'
         }`}
       >

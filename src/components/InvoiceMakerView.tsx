@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Upload, Printer, X, Plus, Trash2, EyeOff, Eye } from 'lucide-react';
+import { Upload, Printer, X, Plus, Trash2, EyeOff, Eye, ExternalLink } from 'lucide-react';
 import { Order } from '../types';
 
 interface InvoiceMakerViewProps {
@@ -127,7 +127,15 @@ export default function InvoiceMakerView({ orders, selectedOrderIds, onUpdateSel
           <h2 className="text-xl font-bold font-display text-white tracking-tight">Invoice Maker</h2>
           <p className="text-sm text-gray-400 mt-1">Generate and print custom invoices from your orders.</p>
         </div>
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-3 flex-wrap">
+          <button
+            onClick={() => window.open(window.location.href, '_blank')}
+            className="flex items-center gap-2 bg-[#1a1a1a] hover:bg-[#2a2a2a] border border-[#333] text-white px-4 py-2 rounded-lg font-medium transition-colors text-sm"
+            title="Open app in a new tab if Print is blocked"
+          >
+            <ExternalLink size={18} />
+            Open in New Tab
+          </button>
           <button
             onClick={handlePrint}
             disabled={visibleSelectedOrders.length === 0 && customItems.length === 0}

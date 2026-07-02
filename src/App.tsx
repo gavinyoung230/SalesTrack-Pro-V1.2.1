@@ -747,7 +747,7 @@ export default function App() {
   }
 
   return (
-    <div id="ops-manager-app-root" className="flex flex-col lg:flex-row min-h-screen bg-black text-white font-sans selection:bg-[#4169E1]/30 selection:text-white">
+    <div id="ops-manager-app-root" className="flex flex-col lg:flex-row min-h-screen bg-black text-white font-sans selection:bg-[#4169E1]/30 selection:text-white print:bg-white print:text-black">
       
       {/* Drawer and desktop sidebar menu controller */}
       <Sidebar
@@ -763,7 +763,7 @@ export default function App() {
       {/* Main Viewport Content Block */}
       <main 
         id="main-viewport" 
-        className="flex-1 flex flex-col p-5 md:p-8 lg:p-10 pt-[88px] lg:pt-10 overflow-hidden w-full max-w-7xl mx-auto relative cursor-default"
+        className="flex-1 flex flex-col p-5 md:p-8 lg:p-10 pt-[88px] lg:pt-10 overflow-hidden w-full max-w-7xl mx-auto relative cursor-default print:p-0 print:pt-0 print:overflow-visible print:max-w-none print:w-auto"
       >
         {/* Managed user banner */}
         {managedUserEmail && (
